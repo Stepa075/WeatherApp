@@ -10,11 +10,17 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.FragmentActivity
 import com.stepa075.weatherapp.R
+import com.stepa075.weatherapp.adapters.VpAdapter
 import com.stepa075.weatherapp.databinding.FragmentMainBinding
 
 
 class MainFragment : Fragment() {
+    private val flist = listOf(
+        HoursFragment.newInstance(),
+        DaysFragment.newInstance()
+    )
    private lateinit var pLauncher: ActivityResultLauncher<String>
     private lateinit var binding: FragmentMainBinding
 
@@ -29,13 +35,26 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         checkPermission()
+        init()
+
+    }
+
+    private fun init() = with(binding){
+        val adapter = VpAdapter(activity as FragmentActivity, flist)
+        vp.adapter = adapter
 
     }
 
     private fun permissionListener(){
         pLauncher = registerForActivityResult(
             ActivityResultContracts.RequestPermission()){
-            Toast.makeText(activity, "Permission is $it", Toast.LENGTH_LONG).show()
+            var one = ""
+            one = if(it == true){
+                "granted"
+            } else{
+                "not granted"
+            }
+            Toast.makeText(activity, "Permission $one", Toast.LENGTH_LONG).show()
         }
     }
 

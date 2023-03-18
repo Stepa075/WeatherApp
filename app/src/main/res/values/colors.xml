@@ -7,4 +7,8 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="my_white">#F1E9E9</color>
+    <color name="blue_from_card">#663B8DB4</color>
+    <color name="blue_from_themes">#3180A5</color>
+    <color name="blue_from_buttons">#66155B7C</color>
 </resources>
